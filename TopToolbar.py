@@ -1,25 +1,21 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QToolBar,QAction
 
-class TopToolbar():
-    def __init__(self,parent):
-        self.toolBar=QToolBar("Top toolbar",parent)
-        self.openAction = QAction("&Packet Sniffer", parent)
-        self.openAction.triggered.connect(self.goToPacketSniffer)
-        self.toolBar.addAction(self.openAction)
+class TopToolbar(QToolBar):
+    def __init__(self,mainWidget):
+        super(QToolBar,self).__init__()
+        self.mainWidget=mainWidget
+        self.packetSnifferAction = QAction("&Packet Sniffer", self)
+        self.packetSnifferAction.triggered.connect(self.goToPacketSniffer)
+        self.sendRecievePacketsAction=QAction("&Send And Recieve Packets",self)
+        self.sendRecievePacketsAction.triggered.connect(self.goToSendAndRecievePackets)
+        self.addAction(self.packetSnifferAction)
+        self.addAction(self.sendRecievePacketsAction)
 
 
     def goToPacketSniffer(self):
-        if self.currentWindow!=self.packetSnifferWindow:
-            self.currentWindow.hide()
-            self.packetSnifferWindow.show()
-            self.currentWindow=self.packetSnifferWindow
+        self.mainWidget.setCurrentIndex(0)
 
-    def setPacketSnifferWindow(self,win):
-        self.packetSnifferWindow=win
-        self.currentWindow=win
-
-    def setSendRecievePacketsWindow(self,win):
-        self.sendRecievePacketsWindow=win
-        self.currentWindow=win
+    def goToSendAndRecievePackets(self):
+        self.mainWidget.setCurrentIndex(1)
     
