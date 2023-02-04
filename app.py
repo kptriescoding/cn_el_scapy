@@ -11,7 +11,7 @@ def startApplication():
     mainWindow=QMainWindow()
     mainWidget=QStackedWidget()
     mainWindow.setCentralWidget(mainWidget)
-    mainWindow.resize(800,600)
+    mainWindow.resize(900,700)
     packetSnifferWidget=PacketSniffer()
     sendAndReciecePacketsWidget=SendAndReciecePackets()
     mainWidget.addWidget(packetSnifferWidget)
