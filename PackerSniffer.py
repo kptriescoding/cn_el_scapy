@@ -24,6 +24,10 @@ class PacketSniffer(QWidget):
         self.sniffPacketsBtn.setText("Sniff Packets")
         self.sniffPacketsBtn.clicked.connect(self.sniffPacketsBtnClicked)
 
+        self.emptyTableBtn=QtWidgets.QPushButton()
+        self.emptyTableBtn.setText("Empty Table")
+        self.emptyTableBtn.clicked.connect(self.emptyTableBtnClicked)
+
         self.inputTakerLayout=QHBoxLayout()
         self.inputCountLabel=QLabel()
         self.inputCountLabel.setText("Enter Count:")
@@ -59,6 +63,9 @@ class PacketSniffer(QWidget):
 
     def stopSniffBtnClicked(self):
             self.stopThread=True
+    
+    def emptyTableBtnClicked(self):
+        self.packetTable.removeAllEntries()
             
 
 
@@ -75,6 +82,7 @@ class PacketSniffer(QWidget):
         
         self.BtnLayout.addWidget(self.sniffPacketsBtn)
         self.BtnLayout.addWidget(self.stopSniffBtn)
+        self.BtnLayout.addWidget(self.emptyTableBtn)
         self.mainLayout.addLayout(self.BtnLayout)
 
         self.mainLayout.addWidget(self.packetTable)
