@@ -168,6 +168,8 @@ class SendAndReciecePackets(QWidget):
         elif(transportProtocol=="UDP"):
             if dport=="":
                 dport=53
+            else:
+                dport=int(dport)
             transportLayerPacket=UDP(dport=dport)
         elif(transportProtocol=="ICMP"):
             transportLayerPacket=ICMP()

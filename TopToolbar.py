@@ -9,8 +9,11 @@ class TopToolbar(QToolBar):
         self.packetSnifferAction.triggered.connect(self.goToPacketSniffer)
         self.sendRecievePacketsAction=QAction("&Send And Recieve Packets",self)
         self.sendRecievePacketsAction.triggered.connect(self.goToSendAndRecievePackets)
+        self.threeWayHandShakeAction=QAction("&Three Way Handshake",self)
+        self.threeWayHandShakeAction.triggered.connect(self.goToThreeWayHandShake)
         self.addAction(self.packetSnifferAction)
         self.addAction(self.sendRecievePacketsAction)
+        self.addAction(self.threeWayHandShakeAction)
 
 
     def goToPacketSniffer(self):
@@ -18,4 +21,7 @@ class TopToolbar(QToolBar):
 
     def goToSendAndRecievePackets(self):
         self.mainWidget.setCurrentIndex(1)
+
+    def goToThreeWayHandShake(self):
+        self.mainWidget.setCurrentIndex(2)
     

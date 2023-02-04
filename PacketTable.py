@@ -29,7 +29,7 @@ class PacketTable(QTableWidget):
 
     def addRowEntry(self,s):
         try:
-            print(s.show())
+            # print(s.show())
             self.setRowCount(self.rowCount()+1)
             self.setItem(self.rowCount()-1,0,QTableWidgetItem(str(self.rowCount())))
             try:

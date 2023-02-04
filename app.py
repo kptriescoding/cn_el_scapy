@@ -4,6 +4,7 @@ import sys
 from PackerSniffer import PacketSniffer
 from TopToolbar import TopToolbar
 from SendAndRecievePackets import SendAndReciecePackets
+from ThreeWayHandShake import ThreeWayHandShake
 
 
 def startApplication():
@@ -14,11 +15,13 @@ def startApplication():
     mainWindow.resize(900,700)
     packetSnifferWidget=PacketSniffer()
     sendAndReciecePacketsWidget=SendAndReciecePackets()
+    threeWayHandShakeWidget=ThreeWayHandShake()
     mainWidget.addWidget(packetSnifferWidget)
     mainWidget.addWidget(sendAndReciecePacketsWidget)
+    mainWidget.addWidget(threeWayHandShakeWidget)
     topToolbar=TopToolbar(mainWidget)
     mainWindow.addToolBar(topToolbar)
-    mainWidget.setCurrentIndex(1)
+    mainWidget.setCurrentIndex(2)
     mainWindow.show()
 
 
