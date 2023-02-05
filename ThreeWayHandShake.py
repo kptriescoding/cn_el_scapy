@@ -125,33 +125,37 @@ class ThreeWayHandShake(QWidget):
             self.processLogging.setText(self.GETData.show(dump=True))
 
     def startHandshake(self):
-        hostUrl=self.urlInput.text()
-        get = "GET / HTTP/1.1\r\nHost:"+hostUrl+"\r\nConnection: keep-alive\r\nCache-Control: max-age=0\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\nAccept-Language: en-US,en;q=0.8\r\n\r\n"
-        ip=IP(dst=hostUrl)
-        port=RandNum(1024,65535)
-        self.SYN=ip/TCP(sport=port, dport=80, flags="S", seq=42)
-        self.processLogging.setText("[*] Sending SYN packet...")
-        self.SYNACK=sr1(self.SYN)
-        sleep(1)
-        self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sent SYN Packets...\n[*] Recieved SYNACK Packets...")
-        self.ACK=ip/TCP(sport=self.SYNACK.dport, dport=80, flags="A", seq=self.SYNACK.ack, ack=self.SYNACK.seq + 1)
-        self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sending ACK packet....")
-        send(self.ACK)
-        sleep(1)
-        self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sending GET packet....")
-        self.GET=self.ACK/get
-        self.Response=sr1(self.GET)
-        sleep(1)
-        filter="host "+hostUrl
-        self.GETData=sniff(count=1,filter=filter)
-        self.GETData=self.GETData[0]
-        sleep(1)
-        self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Closing Connection....\n[*] Sending FIN packet...")
-        self.FIN=ip/TCP(sport=self.SYNACK.dport, dport=80, flags="F", seq=self.SYNACK.ack, ack=self.SYNACK.seq + 1)
-        send(self.FIN)
-        sleep(1)
-        self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Done!")
-        self.bottomLayer.setCurrentPacket(self.GETData)
+        try:
+            hostUrl=self.urlInput.text()
+            get = "GET / HTTP/1.1\r\nHost:"+hostUrl+"\r\nConnection: keep-alive\r\nCache-Control: max-age=0\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36\r\nAccept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\r\nAccept-Language: en-US,en;q=0.8\r\n\r\n"
+            ip=IP(dst=hostUrl)
+            port=RandNum(1024,65535)
+            self.SYN=ip/TCP(sport=port, dport=443, flags="S", seq=42)
+            self.processLogging.setText("[*] Sending SYN packet...")
+            self.SYNACK=sr1(self.SYN,timeout=5)
+            sleep(1)
+            self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sent SYN Packets...\n[*] Recieved SYNACK Packets...")
+            self.ACK=ip/TCP(sport=self.SYNACK.dport, dport=443, flags="A", seq=self.SYNACK.ack, ack=self.SYNACK.seq + 1)
+            self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sending ACK packet....")
+            send(self.ACK)
+            sleep(1)
+            self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Sending GET packet....")
+            self.GET=self.ACK/get
+            self.Response=sr1(self.GET,timeout=10)
+            sleep(1)
+            filter="host "+hostUrl
+            self.GETData=sniff(count=1,filter=filter,timeout=10)
+            self.GETData=self.GETData[0]
+            sleep(1)
+            self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Closing Connection....\n[*] Sending FIN packet...")
+            self.FIN=ip/TCP(sport=self.SYNACK.dport, dport=443, flags="F", seq=self.SYNACK.ack, ack=self.SYNACK.seq + 1)
+            send(self.FIN)
+            sleep(1)
+            self.processLogging.setText(self.processLogging.toPlainText()+"\n[*] Done!")
+            self.bottomLayer.setCurrentPacket(self.GETData)
+        except Exception as e:
+            print(e)
+            self.processLogging.setText(str(self.processLogging.toPlainText())+"\nThere are an error recieving the packets\n Please Try again")
 
     
 
