@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication,QMainWindow,QAction,QTableWidget,QTableWidgetItem,QVBoxLayout,QHeaderView,QWidget,QGridLayout,QHBoxLayout,QLabel
 from TopToolbar import TopToolbar
 import sys
-from scapy.all import sniff,get_if_list,IP
+from scapy.all import sniff,get_if_list,IP,ARP
 import socket
 from BottomLayer import BottomLayer
 from threading import Thread
@@ -36,8 +36,12 @@ class PacketTable(QTableWidget):
                 self.setItem(self.rowCount()-1,1,QTableWidgetItem(s[IP].src))
                 self.setItem(self.rowCount()-1,2,QTableWidgetItem(s[IP].dst))
             except:
-                self.setItem(self.rowCount()-1,1,QTableWidgetItem(s[1].psrc))
-                self.setItem(self.rowCount()-1,2,QTableWidgetItem(s[1].pdst))
+                try:
+                    self.setItem(self.rowCount()-1,1,QTableWidgetItem(s[ARP].psrc))
+                    self.setItem(self.rowCount()-1,2,QTableWidgetItem(s[ARP].pdst))
+                except:
+                    print(s)
+            
             self.setItem(self.rowCount()-1,3,QTableWidgetItem(str(s.time)))
             try:
                 self.setItem(self.rowCount()-1,5,QTableWidgetItem(str(s.load)))
