@@ -40,7 +40,7 @@ Hello, this is a simple packet sniffer made using scapy.
 
 
    
-### Installation - Linux
+### Installation 
 
 1. Install java 
 ```bash
@@ -49,30 +49,56 @@ Hello, this is a simple packet sniffer made using scapy.
    ```
 
 2. Clone the repo
-```git clone https://github.com/kptriescoding/cn_el_scapy
+```bash
+   git clone https://github.com/kptriescoding/cn_el_scapy
    cd cn_el_scapy
    ```
 
 3. Install the requirements 
-```pip i -r requirements.txt
+```bash
+   pip i -r requirements.txt
   ```
 
 4. Run the application
-```sudo python3 app.py
+```bash
+   sudo python3 app.py
     
   ```
 
 
 
-## Some Sample Commands Usages
+## Various Features
 
-### 1. mkdir
+### 1. Send and Recieve Packets
 
-<p> mkdir is used to make a new directory<br/><br/>Usage</p>
-
-   ```bash
-    mkdir dirname
-   ```
+This section of “ Smart Sniff ” involves creation of packets , sending it to some host and
+finally receiving packets sent .This contains 2 layer where filters can be applied , “ Network
+Layer” the later , the “Transport Layer”. The following are the options available in this layout of
+the application through which packets headers are constructed finally packets are created and
+sent-recieved
+1. Protocol: Although various protocols are provided in the scapy framework we have
+considered only the IP protocol for simplicity
+2. Source: User is prompted to enter the source address(IP address) from which the packet
+is to be sent
+3. Destination: User is also prompted to enter the destination address(IP address) to which
+the packet is to be sent in the network
+4. Destination Port: User is supposed to write port number(dport) of destination machine
+so that the destination machine can direct packets correctly
+5. Timeout: This value is by default set to 10 mS and user can change the value, typically
+used to tell source to wait for the acknowledgement of the packet it sent to the destination
+IP
+6. Stop Sniffing: This option stops sniffing packets from the network .
+7. Enter Data: Used to append the information to the packet, which is to be sent to the
+destination .Text input option is available ,while sniffing we get the same information
+back (discussed in section 2.2)
+8. Create: Using all the above information provided layers are stacked and packet is created
+and the packet info is displayed to the user
+9. Send: On clicked the created packet is then sent into the network to reach desired host
+10. Generate PDF: This button when clicked generates PDF of 2D graphical visualization
+of all the packets sniffed from the network interface .A screenshot of the same is pasted
+in “Chapter 3”
+11. Raw Data: When clicked displays the raw data the packet contains
+12. Hex Data: When clicked displays the data the packet contains in hex format
 
 ### 2. cd
 
@@ -83,97 +109,4 @@ Hello, this is a simple packet sniffer made using scapy.
    ```
 ### 3. ls
 
-<p> ls command is used to list all files of an directory <br/><br/>Usage</p>
 
-   ```bash
-   ls
-   ```
-<p align="center">or</p>
-
-   ```bash
-   ls dirname
-   ```
-
-### 4. touch
-
-<p> touch is used to create a regular file <br/><br/>Usage</p>
-
-   ```bash
-   touch filename
-   ```
-### 5. cat
-
-<p> cat is used to display contents of a file <br/><br/>Usage</p>
-
-   ```bash
-   cat filename
-   ```
-
-### 6. rmdir
-
-<p> rmdir is used to delete a directory <br/><br/>Usage</p>
-
-   ```bash
-   rmdir filename
-   ```
-
-### 7. rm
-
-<p> rm is used to delete a file <br/><br/>Usage</p>
-
-   ```bash
-   rm file
-   ```
-### 8. lnk
-
-<p> link is used to create shortcuts of a file or directory<br/><br/>Usage</p>
-
-   ```bash
-   lnk srcname destname
-   ```
-
-### 9. mv
-
-<p> mv is used to move a file from one location to another. If the srcname is the same as destname then it is similar to renaming<br/><br/>Usage</p>
-
-   ```bash
-   mv srcname destname
-   ```
-
-### 10. grep
-
-<p> grep can be used for pattern matching <br/><br/>Usage</p>
-
-   ```bash
-   grep pattern text
-   ```
-
-### 11. Traversal through '/', '..', '.'
-
-<p>Multilevel traversal is possible using '/' to specify the path as we go from each outer directory to inner directory. 
-The name for the root folder is '/' which can be accessed from any folder. The parent can be accessed using '..' meanwhile
-the current folder by '.' .This can be used for any command where path is used
-<br/><br/>Some Example Usages </p>
-1. Move to root
-
-   ```bash
-   cd /
-   ```
-2. Make a directory in parent directory
-
-```bash
-mkdir ../dirname
-   ```
-2. Make a in a inner directory from root (Note that all the directory except the outer ones must exist)
-
-```bash
-mkdir /dir1/dir2/dir3/dirname
-   ```
-### 12. Piping
-
-<p> Piping can be used here to send the output of one command as a parameter to the next
-one <br/><br/>Usage (Here the content of the file is given as the 2nd parameter to the grep command) </p>
-
-   ```bash
-   cat filename | grep pattern
-   ```
