@@ -90,23 +90,62 @@ IP
 6. Stop Sniffing: This option stops sniffing packets from the network .
 7. Enter Data: Used to append the information to the packet, which is to be sent to the
 destination .Text input option is available ,while sniffing we get the same information
-back (discussed in section 2.2)
+back 
 8. Create: Using all the above information provided layers are stacked and packet is created
 and the packet info is displayed to the user
 9. Send: On clicked the created packet is then sent into the network to reach desired host
 10. Generate PDF: This button when clicked generates PDF of 2D graphical visualization
-of all the packets sniffed from the network interface .A screenshot of the same is pasted
-in “Chapter 3”
+of all the packets sniffed from the network interface .
 11. Raw Data: When clicked displays the raw data the packet contains
 12. Hex Data: When clicked displays the data the packet contains in hex format
 
-### 2. cd
+### 2. Packet Sniffing and related options
 
-<p> cd is a command can be used to change a directory <br/><br/>Usage</p>
+For sniffing packets through Scapy we need not explicitly send any data but various other
+filters can be applied . “sniff()” is the command used to sniff packets using Scapy . The following
+are the different options given for the user to enter .Further we have displayed screenshots of this
+page in “Chapter 3” with all the below options provided
+1. Count: If entered This number and specific count option is selected (another option is
+unlimited which sniffs packets as soon as it is received through the network interface) is
+used to sniff only given number of packets from the network interfaces .
+“sniff(count=10)” is an example of applying this filter
+2. Protocol: User can enter the particular protocol from which he needs to sniff packets ,by
+default it sniffs from all protocols if not mentioned explicitly. For example “tcp” “udp”
+are some of the options
+3. Network Interface: By default packets are sniffed from all network interfaces but we
+can explicitly select any particular interface detected by scapy .For example “sniff(iface=
+“wl0” )” which sniffs from LAN .Loop Back( lo) is another option where in packets sent
+are received by the same IP address that of sender
+4. Sniff Packets: This option starts sniffing packets according to the filters applied and
+starts displaying packet info into a table visible to the user. Each row of the table contains
+information related to a single packet sniffed which are source, destination, time at which
+the packet was sent, type of IP address (IPV4 /IPV6) , length , the information recieved
+5. Stop Sniffing: This option stops sniffing packets from the network
+6. Empty Table: Used to empty the table to make UI more readable
+7. Generate PDF: This button when clicked generates PDF of 2D graphical visualization
+of all the packets sniffed from the network interface .
+8. Raw Data: When clicked displays the raw data the packet contains
+9. Hex Data: When clicked displays the data the packet contains in hex format
 
-   ```bash
-   cd dirname
-   ```
-### 3. ls
+### 3. 3-way Handshake and related option
+The first and the only thing required to do a 3-way handshake is the Destination host which the
+user wants to have a connection. As discussed earlier there are three packets to be sent called
+“SYN”, “SYN-ACK”, “ACK” of which first and last is sent by the user and the destination does
+the later. Below are the options provided in this section
+1. Destination Host: User is supposed to enter the destination address (DNS address) with
+which he wants to establish a connection with.
+2. Create: This initializes /starts the connection establishment process using 3-way
+handshake
+3. SYN: On clicked displays information about syn packet sent to the destination address
+4. SYN-ACK: On clicked displays information about syn-ack packet sent by the destination
+address to the sender after receiving a connection request which it received through syn
+packet
+5. ACK: On clicked displays information about ack packet sent to the destination address
+after receiving syn-ack packet from the destination IP which will establish a successful
+connection after which both can send and receive packets
+6. Generate PDF: This button when clicked generates PDF of 2D graphical visualization
+of all the packets sniffed from the network interface .
+7. Raw Data: When clicked displays the raw data the packet contains
+8. Hex Data: When clicked displays the data the packet contains in hex format
 
 
