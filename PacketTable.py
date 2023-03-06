@@ -40,7 +40,8 @@ class PacketTable(QTableWidget):
                     self.setItem(self.rowCount()-1,1,QTableWidgetItem(s[ARP].psrc))
                     self.setItem(self.rowCount()-1,2,QTableWidgetItem(s[ARP].pdst))
                 except:
-                    print(s)
+                    self.setItem(self.rowCount()-1,1,QTableWidgetItem(s[1].src))
+                    self.setItem(self.rowCount()-1,2,QTableWidgetItem(s[1].dst))
             
             self.setItem(self.rowCount()-1,3,QTableWidgetItem(str(s.time)))
             try:

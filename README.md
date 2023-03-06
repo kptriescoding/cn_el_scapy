@@ -2,16 +2,16 @@
 <br />
 
 
-  <h1 align="center">File System Simulator</h1>
+  <h1 align="center">Smart Sniff</h1>
 
   <p align="center">
-    A Simple File System Simulator for people wanting to learn some basic linux commands
+    A Simple Packet Sniffer for people wanting to learn some basic linux commands
     <br/>
     By 
     <br />
-    <a href="https://github.com/kptriescoding/FileSystemSimulator_USP_DAA_EL/issues">Report Bug</a>
+    <a href="https://github.com/kptriescoding/cn_el_scapy/issues">Report Bug</a>
     ·
-    <a href="https://github.com/kptriescoding/FileSystemSimulator_USP_DAA_EL/issues">Request Feature</a>
+    <a href="https://github.com/kptriescoding/cn_el_scapy/issues">Request Feature</a>
   </p>
   
   <p class="text-center mb-3" align="center">
